@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -47,6 +48,14 @@ public final class City implements Serializable {
 		return version;
 	}
 
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 	public void setVersion(long version) {
 		this.version = version;
 	}
@@ -57,6 +66,10 @@ public final class City implements Serializable {
 	
 	@Column(name = "name", nullable = false, length = 100)
 	private String name;
+	
+	@ManyToOne
+	private Country country;
+	
 	/*
 	@Column(name = "creation_time", nullable = false)
 	@Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
