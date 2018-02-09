@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
+@NoRepositoryBean
 public interface BaseRepository<T, ID extends Serializable> extends CrudRepository<T, ID> {
 	void delete(T deleted);
 	List<T> findAll();

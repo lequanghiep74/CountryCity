@@ -11,21 +11,21 @@ import com.country.city.entity.City;
 import com.country.city.intface.CityRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/cities")
 public class CityController {
 	private CityRepository cityRepository;
 	
-	@GetMapping("/cities")
+	@GetMapping("/fetch")
 	public List<City> getAllCities() {
 		return cityRepository.findAll();
 	}
 	
-	@PostMapping("/cities")
+	@PostMapping("/create")
 	public City createCity(@Valid @RequestBody City city) {
 		return cityRepository.save(city);
 	}
 	
-	@GetMapping("/cities/{id}")
+	@GetMapping("/fetch/{id}")
 	public ResponseEntity<City> getCityById(@PathVariable(value = "id") Long cityID) {
 		City city = cityRepository.findOne(cityID);
 		
@@ -36,7 +36,7 @@ public class CityController {
 		return ResponseEntity.ok().body(city);
 	}
 	
-	@PutMapping("cities/{id}")
+	@PutMapping("cities/update/{id}")
 	public ResponseEntity<City> updateCity(@PathVariable(value = "id") Long cityId, @Valid @RequestBody City cityDetails) {
 		City city = cityRepository.findOne(cityId);
 		
@@ -51,7 +51,7 @@ public class CityController {
 		return ResponseEntity.ok(updateCity);
 	}
 	
-	@DeleteMapping("/cities/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<City> deleteCity(@PathVariable(value = "id") Long cityId) {
 		City city = cityRepository.findOne(cityId);
 		if (city == null) {
